@@ -1,8 +1,8 @@
 package personal.sandbox;
 
-public class trimTest
+public class TrimTest
 {
-    public trimTest(String s)
+    public TrimTest(String s)
     {
         System.out.println(reformat(s));
     }
@@ -14,7 +14,7 @@ public class trimTest
     
     public static void main(String[] args)
     {
-        new trimTest(args[0]);
+        new TrimTest(args[0]);
     }
 
 }

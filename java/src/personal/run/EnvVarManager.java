@@ -172,6 +172,8 @@ public class EnvVarManager extends JFrame implements ActionListener
 					bf.write(l+"\n");
 				}
 				bf.close();
+
+                System.out.println("Successful write");
 				
 			} catch (IOException e) 
 			{

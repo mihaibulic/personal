@@ -75,10 +75,10 @@ public class Mp3TagFixer
 			{
 				Tag tag = af.getTag();
 				
-				tag.setField(FieldKey.ARTIST, artist.replaceAll("  ", " ").trim());
-				tag.setField(FieldKey.TITLE, title.replaceAll("  ", " ").trim());
-				tag.setField(FieldKey.GENRE, genre.replaceAll("  ", " ").trim());
-				tag.setField(FieldKey.ALBUM, artist.replaceAll("  ", " ").trim());
+				tag.setField(FieldKey.ARTIST, artist);
+				tag.setField(FieldKey.ALBUM, artist);
+				tag.setField(FieldKey.TITLE, title);
+				tag.setField(FieldKey.GENRE, genre);
 				
 				af.commit();
 			} catch (TagException e)
@@ -198,13 +198,14 @@ public class Mp3TagFixer
 					tag = f.getTag();
 					
 					String artist = tag.getFirst(FieldKey.ARTIST);
+					String album = tag.getFirst(FieldKey.ALBUM);
 					String newArtist = fixArtist(artist);
 					String title = tag.getFirst(FieldKey.TITLE);
 					String newTitle = capitalize(title);
 					String genre = tag.getFirst(FieldKey.GENRE);
 					String newGenre = fixGenre(genre);
 					
-					boolean changed = !(newArtist.equals(artist) && newTitle.equals(title) && newGenre.equals(genre));
+					boolean changed = !newArtist.equals(artist) || !newArtist.equals(album) || !newTitle.equals(title) || !newGenre.equals(genre);
 					
 					add(newArtist, newGenre, songs.size());
 					songs.add(new Song(newArtist, newTitle, newGenre, f, changed));
@@ -339,7 +340,7 @@ public class Mp3TagFixer
 	        }
         }
         
-        return in.trim();
+        return in.replaceAll("  ", " ").trim();
     }
     
     
@@ -388,10 +389,10 @@ public class Mp3TagFixer
     			}
     		}
 
-    		if(!found) in = capitalize(in).trim();
+    		if(!found) in = capitalize(in);
     	}
     	
-    	return in;
+    	return in.replaceAll("  ", " ").trim();
     }
     
     private String capitalize(String in)
@@ -414,7 +415,7 @@ public class Mp3TagFixer
             useCap = (a == ' ' || a == '_' || a == '(');
         }
         
-        return out.trim();
+        return out.replaceAll("  ", " ").trim();
     }
 
     public static void main(String[] args) throws IOException
