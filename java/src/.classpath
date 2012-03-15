@@ -2,9 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/april"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/jarvis"/>
 	<classpathentry kind="lib" path="/usr/share/java/jaudiotagger-2.0.3.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/april"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/april"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

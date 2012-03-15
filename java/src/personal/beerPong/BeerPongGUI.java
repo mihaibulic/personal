@@ -17,10 +17,16 @@ import april.jmat.geom.GRay3D;
 import april.util.ParameterGUI;
 import april.util.ParameterListener;
 import april.util.TimeUtil;
+import april.vis.HelpOutput;
 import april.vis.VisCanvas;
+import april.vis.VisCanvasEventHandler;
 import april.vis.VisChain;
+import april.vis.VisCircle;
+import april.vis.VisDataFillStyle;
+import april.vis.VisDataLineStyle;
+import april.vis.VisLineSegment;
+import april.vis.VisRectangle;
 import april.vis.VisWorld;
-import april.vis.VzCircle;
 
 public class BeerPongGUI implements ParameterListener, Runnable
 {
@@ -104,23 +110,23 @@ public class BeerPongGUI implements ParameterListener, Runnable
                             ColorSpaceConvert.HSVtoRGB((int)(point[2].doubleValue()), (int)(point[3].doubleValue()), (int)(100 + 155 * (thickness / 24))),
                             ColorSpaceConvert.HSVtoRGB((int)(point[2].doubleValue()), (int)(point[3].doubleValue()), (int)(100 + 135 * (thickness / 24)))} ;
                     
-                    vbRipples.addBack(new VisChain(
+                    vbRipples.addBuffered(new VisChain(
                             LinAlg.translate(point[0], point[1]), 
-                            new VzCircle(point[4] - (2 * (thickness / 24)),new VisDataLineStyle(new Color(rgb[0][0], rgb[0][1], rgb[0][2]), thickness / 5, true)), 
-                            new VzCircle(point[4] - (thickness), new VisDataLineStyle(new Color(rgb[1][0], rgb[1][1], rgb[1][2]), thickness / 5, true)), 
-                            new VzCircle(point[4], new VisDataLineStyle(new Color(rgb[2][0], rgb[2][1], rgb[2][2]), thickness / 5, true)), 
-                            new VzCircle(point[4] + (thickness / 5), new VisDataLineStyle(new Color(rgb[3][0], rgb[3][1], rgb[3][2]), thickness / 5, true)), 
-                            new VzCircle(point[4] + (2 * thickness / 5), new VisDataLineStyle(new Color(rgb[4][0], rgb[4][1], rgb[4][2]), thickness / 5, true)), 
-                            new VzCircle(point[4] + (3 * thickness / 5), new VisDataLineStyle(new Color(rgb[5][0], rgb[5][1], rgb[5][2]), thickness / 5, true)), 
-                            new VzCircle(point[4] + (4 * thickness / 5), new VisDataLineStyle(new Color(rgb[6][0], rgb[6][1], rgb[6][2]), thickness / 5, true)), 
-                            new VzCircle(point[4] + (1.5 * (thickness / 24)), new VisDataLineStyle(new Color(rgb[7][0], rgb[7][1], rgb[7][2]), thickness / 5, true))));
+                            new VisCircle(point[4] - (2 * (thickness / 24)),new VisDataLineStyle(new Color(rgb[0][0], rgb[0][1], rgb[0][2]), thickness / 5, true)), 
+                            new VisCircle(point[4] - (thickness), new VisDataLineStyle(new Color(rgb[1][0], rgb[1][1], rgb[1][2]), thickness / 5, true)), 
+                            new VisCircle(point[4], new VisDataLineStyle(new Color(rgb[2][0], rgb[2][1], rgb[2][2]), thickness / 5, true)), 
+                            new VisCircle(point[4] + (thickness / 5), new VisDataLineStyle(new Color(rgb[3][0], rgb[3][1], rgb[3][2]), thickness / 5, true)), 
+                            new VisCircle(point[4] + (2 * thickness / 5), new VisDataLineStyle(new Color(rgb[4][0], rgb[4][1], rgb[4][2]), thickness / 5, true)), 
+                            new VisCircle(point[4] + (3 * thickness / 5), new VisDataLineStyle(new Color(rgb[5][0], rgb[5][1], rgb[5][2]), thickness / 5, true)), 
+                            new VisCircle(point[4] + (4 * thickness / 5), new VisDataLineStyle(new Color(rgb[6][0], rgb[6][1], rgb[6][2]), thickness / 5, true)), 
+                            new VisCircle(point[4] + (1.5 * (thickness / 24)), new VisDataLineStyle(new Color(rgb[7][0], rgb[7][1], rgb[7][2]), thickness / 5, true))));
                     
                     point[4]++;
                     points.set(a, point);
                 }
             }        
-            vbRipples.addBack(chain);
-            vbRipples.swap();
+            vbRipples.addBuffered(chain);
+            vbRipples.switchBuffer();
         }
     }
     

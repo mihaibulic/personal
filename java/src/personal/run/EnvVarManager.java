@@ -180,6 +180,8 @@ public class EnvVarManager extends JFrame implements ActionListener
 				e.printStackTrace();
 			}
 		}
+
+        this.pack();
 	}
 	
 	void insertRow(String fileName, String path)
